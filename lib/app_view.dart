@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/utils/todo_list.dart';
 
 class app_view extends StatefulWidget {
   const app_view({super.key});
@@ -13,7 +14,18 @@ class _app_viewState extends State<app_view> {
     List toDoLst = [
       ['Learn Flutter', false],
       ['Drink Coffee', false],
+      ['White Coffee', false],
     ];
+
+    final String taskName;
+    final bool taskCompleted;
+    final Function(bool?)? onChanged;
+
+    void checkBoxChanged(int index) {
+      setState(() {
+        toDoLst[index][1] = !toDoLst[index][1];
+      });
+    }
 
     return Scaffold(
       backgroundColor: Colors.deepPurple.shade300,
@@ -27,19 +39,10 @@ class _app_viewState extends State<app_view> {
         child: ListView.builder(
           itemCount: toDoLst.length,
           itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Text(
-                  toDoLst[index][0],
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-              ),
+            return todo_list(
+              taskName: toDoLst[index][0],
+              taskCompleted: toDoLst[index][1],
+              onChanged: (value) => checkBoxChanged(index),
             );
           },
         ),
