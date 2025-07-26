@@ -89,7 +89,11 @@ class _app_viewState extends State<app_view> {
               ),
             ),
           ),
-          FloatingActionButton(onPressed: saveNewTodo, child: Icon(Icons.add)),
+          FloatingActionButton(
+            onPressed: saveNewTodo,
+            backgroundColor: Colors.green,
+            child: Icon(Icons.add, color: Colors.white),
+          ),
         ],
       ),
     );
